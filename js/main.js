@@ -326,7 +326,13 @@ function updateTimeframeWarning() {
 function startRecord(projectID,activityID,userID) {
     var now = Math.floor(((new Date()).getTime()) / 1000);
     startsec = now;
-    offset = 0;
+	
+	/* 
+		Patch for https://github.com/kimai/kimai/issues/905
+		Shouldn't reset the global 'offset' variable that calculates difference between server time and local time
+		offset = 0;
+	*/
+    
     show_stopwatch();
     value = projectID +"|"+ activityID;
     $.post("processor.php", { axAction: "startRecord", axValue: value, id: userID},
